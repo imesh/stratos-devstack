@@ -24,7 +24,7 @@ set -e # terminate on any error
 
 # Configuration parameters start
 host_user="ubuntu"
-host_private_ip=10.9.178.167
+host_private_ip="127.0.0.1"
 host_user_home="/home/ubuntu"
 
 ec2_identity=""
