@@ -23,7 +23,7 @@ stratos_lb_package="apache-stratos-load-balancer-4.0.0.zip"
 stratos_ca_package_path=${stratos_packages_path}/${stratos_ca_package}
 stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
 
-host_private_ip=127.0.0.1
+host_private_ip=172.31.13.226
 
 jdk_tar_file="jdk-7u55-linux-x64.tar.gz"
 jdk_folder=jdk1.7.0_55
@@ -46,7 +46,7 @@ copy_packages_to_puppet_modules=true
 copy_jdk_to_puppet_modules=true
 update_nodes_pp_file=true
 
-log=install-stratos.log
+log=install.log
 
 if [ ${install_jdk} = true ]; then
    pushd /opt
@@ -57,10 +57,10 @@ if [ ${install_jdk} = true ]; then
    tar -zxvf ${jdk_tar_file}
 
    echo "Updating .bashrc" | tee -a ${log}
-   cat "" >> ~/.bashrc
-   cat "JAVA_HOME=/opt/jdk1.7.0_55" >> ~/.bashrc
-   cat "PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
-   cat "export JAVA_HOME" >> ~/.bashrc
+   echo "" >> ${home_path}/.bashrc
+   echo "JAVA_HOME=/opt/jdk1.7.0_55" >> ${home_path}/.bashrc
+   echo "PATH=$PATH:$JAVA_HOME/bin" >> ${home_path}/.bashrc
+   echo "export JAVA_HOME" >> ${home_path}/.bashrc
    popd
 fi
 
