@@ -34,11 +34,11 @@ activemq_download_url="http://apache.spinellicreations.com/activemq/5.9.1/apache
 activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
 activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
 
-install_jdk=true
-install_mysql_server=true
-install_zip=true
-download_stratos_packs=true
-download_activemq_pack=true
+install_jdk=false
+install_mysql_server=false
+install_zip=false
+download_stratos_packs=false
+download_activemq_pack=false
 install_puppet_master=true
 copy_puppet_scripts=true
 copy_activemq_client_libs=true
@@ -129,6 +129,7 @@ popd
 
 if [ ${install_puppet_master} = true ]; then
    echo "Installing puppet master" | tee -a ${log}
+   mkdir -p ${puppet_installer_path}
    pushd ${puppet_installer_path}
    git clone https://github.com/thilinapiy/puppetinstall .
    ./puppetinstall -m -d stratos.org -s ${host_private_ip}
