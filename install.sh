@@ -245,7 +245,7 @@ if [ ${prepare_installer} = true ]; then
 fi
 
 if [ ${start_installer} = true ]; then
-	pushd stratos_installer_path
+	pushd ${stratos_installer_path}
 	./setup.sh
 	popd
 fi
