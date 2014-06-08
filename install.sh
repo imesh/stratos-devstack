@@ -44,6 +44,9 @@ activemq_download_url="http://apache.spinellicreations.com/activemq/5.9.1/apache
 activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
 activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
 
+mysql_host="localhost"
+mysql_username="root"
+mysql_password="mysql"
 mysql_root_password="mysql"
 mysql_connector_java="mysql-connector-java-5.1.31"
 mysql_connector_download_url="http://dev.mysql.com/get/Downloads/Connector-J/${mysql_connector_java}.tar.gz"
@@ -249,7 +252,12 @@ if [ ${prepare_installer} = true ]; then
 	sed -i "s@_STRATOS_DOMAIN_@${stratos_domain_name}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_HOST_PRIVATE_IP_@${host_private_ip}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_PUPPET_HOSTNAME_@${puppet_hostname}@g" ${stratos_installer_path}/conf/setup.conf
+	
+	sed -i "s@_MYSQL_HOST_@${mysql_host}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_MYSQL_USERNAME_@${mysql_username}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_MYSQL_PASSWORD_@${mysql_password}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_MYSQL_CONNECTOR_@${mysql_connector_java}@g" ${stratos_installer_path}/conf/setup.conf
+	
 	sed -i "s@_EC2_IDENTITY_@${ec2_identity}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_CREDENTIAL_@${ec2_credential}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_KEYPAIR_NAME_@${ec2_keypair_name}@g" ${stratos_installer_path}/conf/setup.conf
