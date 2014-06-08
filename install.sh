@@ -146,9 +146,11 @@ fi
 
 if [ ${install_mysql_server} = true ]; then
 	echo "Installing MySQL server" | tee -a ${log}
-	debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
-	debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
-	apt-get -y install mysql-server
+	#debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
+	#debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
+	export DEBIAN_FRONTEND=noninteractive
+	apt-get -q -y install mysql-server
+	mysqladmin -u root password ${mysql_root_password}
 fi
 
 if [ ${download_mysql_connector} = true ]; then	
