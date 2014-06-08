@@ -110,29 +110,6 @@ if [ ${install_jdk} = true ]; then
 	popd
 fi
 
-if [ ${install_mysql_server} = true ]; then
-	echo "Installing MySQL server" | tee -a ${log}
-	debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
-	debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
-	apt-get -y install mysql-server
-fi
-
-if [ ${download_mysql_connector} = true ]; then	
-	echo "Downloading mysql connector for java" | tee -a ${log}
-	mkdir -p ${stratos_packages_path} 
-	pushd ${stratos_packages_path}
-	wget ${mysql_connector_download_url}
-	tar -zxvf ${mysql_connector_java}.tar.gz
-	cp ${mysql_connector_java}/${mysql_connector_java}-bin.jar .
-	rm -rf ${mysql_connector_java}/
-	popd
-fi
-
-if [ ${install_zip} = true ]; then
-	echo "Installing zip" | tee -a ${log}
-	apt-get -y install zip
-fi
-
 if [ ${download_stratos_packs} = true ]; then
 	echo "Downloading stratos packages" | tee -a ${log}
 	mkdir -p ${stratos_packages_path}
@@ -165,6 +142,29 @@ if [ ${download_activemq_pack} = true ]; then
 	pushd ${stratos_packages_path}
 	wget ${activemq_download_url}
 	popd
+fi
+
+if [ ${install_mysql_server} = true ]; then
+	echo "Installing MySQL server" | tee -a ${log}
+	debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
+	debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
+	apt-get -y install mysql-server
+fi
+
+if [ ${download_mysql_connector} = true ]; then	
+	echo "Downloading mysql connector for java" | tee -a ${log}
+	mkdir -p ${stratos_packages_path} 
+	pushd ${stratos_packages_path}
+	wget ${mysql_connector_download_url}
+	tar -zxvf ${mysql_connector_java}.tar.gz
+	cp ${mysql_connector_java}/${mysql_connector_java}-bin.jar .
+	rm -rf ${mysql_connector_java}/
+	popd
+fi
+
+if [ ${install_zip} = true ]; then
+	echo "Installing zip" | tee -a ${log}
+	apt-get -y install zip
 fi
 
 if [ ${copy_stratos_source} = true ]; then
