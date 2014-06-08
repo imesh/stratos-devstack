@@ -249,6 +249,7 @@ if [ ${prepare_installer} = true ]; then
 	sed -i "s@_STRATOS_DOMAIN_@${stratos_domain_name}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_HOST_PRIVATE_IP_@${host_private_ip}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_PUPPET_HOSTNAME_@${puppet_hostname}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_MYSQL_CONNECTOR_@${mysql_connector_java}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_IDENTITY_@${ec2_identity}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_CREDENTIAL_@${ec2_credential}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_KEYPAIR_NAME_@${ec2_keypair_name}@g" ${stratos_installer_path}/conf/setup.conf
