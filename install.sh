@@ -43,18 +43,20 @@ install_puppet_master=false
 copy_puppet_scripts=true
 copy_activemq_client_libs=true
 copy_packages_to_puppet_modules=true
+copy_jdk_to_puppet_modules=true
+update_nodes_pp_file=true
 
 log=install-stratos.log
 
 if [ ${install_jdk} = true ]; then
    pushd /opt
-   echo "Downloading jdk..." | tee -a ${log}
+   echo "Downloading jdk" | tee -a ${log}
    wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" ${jdk_download_url}
 
-   echo "Extracting jdk..." | tee -a ${log}
+   echo "Extracting jdk" | tee -a ${log}
    tar -zxvf ${jdk_tar_file}
 
-   echo "Updating .bashrc..." | tee -a ${log}
+   echo "Updating .bashrc" | tee -a ${log}
    cat "" >> ~/.bashrc
    cat "JAVA_HOME=/opt/jdk1.7.0_55" >> ~/.bashrc
    cat "PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
@@ -63,34 +65,34 @@ if [ ${install_jdk} = true ]; then
 fi
 
 if [ ${install_mysql_server} = true ]; then
-   echo "Installing MySQL server..." | tee -a ${log}
+   echo "Installing MySQL server" | tee -a ${log}
    apt-get install mysql-server
 fi
 
 if [ ${install_zip} = true ]; then
-   echo "Installing zip..." | tee -a ${log}
+   echo "Installing zip" | tee -a ${log}
    apt-get install zip
 fi
 
 if [ ${download_stratos_packs} = true ]; then
-   echo "Downloading stratos packages..." | tee -a ${log}
+   echo "Downloading stratos packages" | tee -a ${log}
    pushd ${stratos_packages_path}
-   echo "Downloading source release..." | tee -a ${log}
+   echo "Downloading source release" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_source_package}
  
-   echo "Downloading stratos package..." | tee -a ${log}
+   echo "Downloading stratos package" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_package}
  
-   echo "Downloading cartridge agent package..." | tee -a ${log}
+   echo "Downloading cartridge agent package" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_ca_package}
  
-   echo "Downloading cli package..." | tee -a ${log}
+   echo "Downloading cli package" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_cli_package}
  
-   echo "Downloading haproxy package..." | tee -a ${log}
+   echo "Downloading haproxy package" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_haproxy_package}
  
-   echo "Downloading load balancer package..." | tee -a ${log}
+   echo "Downloading load balancer package" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_lb_package}
  
    echo "Download completed" | tee -a ${log}
@@ -104,12 +106,12 @@ if [ ${download_activemq_pack} = true ]; then
 fi
 
 if [ -d ${stratos_source_path} ]; then
-	echo "Removing existing source folder..." | tee -a ${log}
+	echo "Removing existing source folder" | tee -a ${log}
 	rm -rf ${stratos_source_path}
 fi
 mkdir -p ${stratos_source_path}
 
-echo "Extracting source package..." | tee -a ${log}
+echo "Extracting source package" | tee -a ${log}
 pushd ${stratos_packages_path}
 if [ -d /tmp/${stratos_source_folder} ]; then
 	rm -rf /tmp/${stratos_source_folder}
@@ -120,7 +122,7 @@ rm -rf /tmp/${stratos_source_folder}
 popd
 
 if [ ${install_puppet_master} = true ]; then
-   echo "Installing puppet master..." | tee -a ${log}
+   echo "Installing puppet master" | tee -a ${log}
    pushd ${puppet_installer_path}
    git clone https://github.com/thilinapiy/puppetinstall .
    ./puppetinstall -m -d stratos.org -s ${host_private_ip}
@@ -128,7 +130,7 @@ if [ ${install_puppet_master} = true ]; then
 fi
 
 if [ ${copy_puppet_scripts} = true ]; then
-   echo "Copying puppet scripts..." | tee -a ${log}
+   echo "Copying puppet scripts" | tee -a ${log}
    pushd /etc/puppet/
    cp -rv ${stratos_source_path}/tools/puppet3/manifests/* manifests/
    cp -rv ${stratos_source_path}/tools/puppet3/modules/* modules/
@@ -136,7 +138,7 @@ if [ ${copy_puppet_scripts} = true ]; then
 fi
 
 if [ ${copy_activemq_client_libs} = true ]; then
-   echo "Copying activemq client libraries..." | tee -a ${log} 
+   echo "Copying activemq client libraries" | tee -a ${log} 
    pushd ${stratos_packages_path}
    tar -zxvf ${activemq_tar_file}
    pushd ${activemq_lib_path}
@@ -149,23 +151,25 @@ if [ ${copy_activemq_client_libs} = true ]; then
 fi
 
 if [ ${copy_packages_to_puppet_modules} = true ]; then
-   echo "Copying cartridge agent package to puppet master..." | tee -a ${log}
+   echo "Copying cartridge agent package to puppet master" | tee -a ${log}
    mkdir -p ${puppet_master_path}/modules/agent/files/
    cp -fv ${stratos_ca_package_path} ${puppet_master_path}/modules/agent/files/
    
-   echo "Copying load balancer package to puppet master..." | tee -a ${log}
+   echo "Copying load balancer package to puppet master" | tee -a ${log}
    mkdir -p ${puppet_master_path}/modules/lb/files/
    cp -fv ${stratos_lb_package_path} ${puppet_master_path}/modules/lb/files/
 fi
 
-echo "Copying jdk package to java puppet module..." | tee -a ${log}
-mkdir -p /etc/puppet/modules/java/files/
-cp /opt/${jdk_tar_file} /etc/puppet/modules/java/files/
-echo "jdk package copied to java puppet module"
+if [ ${copy_jdk_to_puppet_modules} = true ]; then
+   echo "Copying jdk package to java puppet module" | tee -a ${log}
+   mkdir -p /etc/puppet/modules/java/files/
+   cp /opt/${jdk_tar_file} /etc/puppet/modules/java/files/
+fi
 
-echo "Updating nodes.pp file..." | tee -a ${log}
-cp templates/nodes.pp ${nodes_pp_path}
-sed -i "s@_HOST_IP_@${host_private_ip}@g" ${nodes_pp_path}
-sed -i "s@_JDK_TAR_FILE_@${jdk_tar_file}@g" ${nodes_pp_path}
-sed -i "s@_JDK_FOLDER_@${jdk_folder}@g" ${nodes_pp_path}
-echo "nodes.pp file updated" | tee -a ${log}
+if [ ${update_nodes_pp_file} = true ]; then
+   echo "Updating nodes.pp file" | tee -a ${log}
+   cp templates/nodes.pp ${nodes_pp_path}
+   sed -i "s@_HOST_IP_@${host_private_ip}@g" ${nodes_pp_path}
+   sed -i "s@_JDK_TAR_FILE_@${jdk_tar_file}@g" ${nodes_pp_path}
+   sed -i "s@_JDK_FOLDER_@${jdk_folder}@g" ${nodes_pp_path}
+fi
