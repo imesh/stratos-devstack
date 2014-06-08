@@ -221,6 +221,8 @@ if [ ${prepare_installer} = true ]; then
 	echo "Preparing stratos installer" | tee -a ${log}
 	pushd ${stratos_source_path}
 	cp -r ${stratos_source_path}/tools/stratos-installer ${stratos_installer_path}
+	popd
+	
 	echo "Updating stratos installer configuration" | tee -a ${log}
 	cp templates/setup.conf ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_STRATOS_INSTALLER_PATH_@${stratos_installer_path}@g" ${stratos_installer_path}/conf/setup.conf
@@ -228,16 +230,15 @@ if [ ${prepare_installer} = true ]; then
 	sed -i "s@_STRATOS_PATH_@${stratos_path}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_JAVA_HOME_@${java_home}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_HOST_USER_@${host_user}@g" ${stratos_installer_path}/conf/setup.conf
-	sed -i "s@_STRATOS_DOMAIN_@${stratos_domain}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_STRATOS_DOMAIN_@${stratos_domain_name}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_HOST_PRIVATE_IP_@${host_private_ip}@g" ${stratos_installer_path}/conf/setup.conf
-	sed -i "s@_HOST_PRIVATE_IP_@${puppet_hostname}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_PUPPET_HOSTNAME_@${puppet_hostname}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_IDENTITY_@${ec2_identity}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_CREDENTIAL_@${ec2_credential}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_KEYPAIR_NAME_@${ec2_keypair_name}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_OWNER_ID_@${ec2_owner_id}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_AVAILABILITY_ZONE_@${ec2_availability_zone}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_EC2_SECURITY_GROUPS_@${ec2_security_groups}@g" ${stratos_installer_path}/conf/setup.conf
-	popd
 fi
 
 if [ ${start_installer} = true ]; then
