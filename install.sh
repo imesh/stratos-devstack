@@ -23,7 +23,7 @@ stratos_lb_package="apache-stratos-load-balancer-4.0.0.zip"
 stratos_ca_package_path=${stratos_packages_path}/${stratos_ca_package}
 stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
 
-host_private_ip=172.31.13.226
+host_private_ip=10.9.178.167
 
 jdk_tar_file="jdk-7u55-linux-x64.tar.gz"
 jdk_folder=jdk1.7.0_55
@@ -34,12 +34,12 @@ activemq_download_url="http://apache.spinellicreations.com/activemq/5.9.1/apache
 activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
 activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
 
-install_jdk=false
-install_mysql_server=false
-install_zip=false
-download_stratos_packs=false
-download_activemq_pack=false
-install_puppet_master=false
+install_jdk=true
+install_mysql_server=true
+install_zip=true
+download_stratos_packs=true
+download_activemq_pack=true
+install_puppet_master=true
 copy_puppet_scripts=true
 copy_activemq_client_libs=true
 copy_packages_to_puppet_modules=true
