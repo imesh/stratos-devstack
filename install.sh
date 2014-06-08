@@ -76,6 +76,7 @@ install_mysql_server=false
 install_zip=false
 download_stratos_packs=false
 download_activemq_pack=false
+copy_stratos_source=false
 install_puppet_master=false
 copy_puppet_scripts=false
 copy_activemq_client_libs=false
@@ -148,20 +149,22 @@ if [ ${download_activemq_pack} = true ]; then
 	popd
 fi
 
-if [ -d ${stratos_source_path} ]; then
-	echo "Removing existing source folder" | tee -a ${log}
-	rm -rf ${stratos_source_path}
-fi
-mkdir -p ${stratos_source_path}
-echo "Extracting source package" | tee -a ${log}
-pushd ${stratos_packages_path}
-if [ -d /tmp/${stratos_source_folder} ]; then
+if [ ${copy_stratos_source} = true ]; then
+	if [ -d ${stratos_source_path} ]; then
+		echo "Removing existing source folder" | tee -a ${log}
+		rm -rf ${stratos_source_path}
+	fi
+	mkdir -p ${stratos_source_path}
+	echo "Extracting source package" | tee -a ${log}
+	pushd ${stratos_packages_path}
+	if [ -d /tmp/${stratos_source_folder} ]; then
+		rm -rf /tmp/${stratos_source_folder}
+	fi
+	unzip ${stratos_source_package} -d /tmp/
+	mv /tmp/${stratos_source_folder}/* ${stratos_source_path}/
 	rm -rf /tmp/${stratos_source_folder}
+	popd
 fi
-unzip ${stratos_source_package} -d /tmp/
-mv /tmp/${stratos_source_folder}/* ${stratos_source_path}/
-rm -rf /tmp/${stratos_source_folder}
-popd
 
 if [ ${install_puppet_master} = true ]; then
 	echo "Installing puppet master" | tee -a ${log}
