@@ -189,7 +189,7 @@ if [ ${install_puppet_master} = true ]; then
 	mkdir -p ${puppet_installer_path}
 	pushd ${puppet_installer_path}
 	git clone https://github.com/thilinapiy/puppetinstall .
-	./puppetinstall -m -d ${stratos_domain_name} -s ${host_private_ip}
+	./puppetinstall -y -m -d ${stratos_domain_name} -s ${host_private_ip}
 	popd
 fi
 
