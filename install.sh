@@ -46,6 +46,8 @@ copy_packages_to_puppet_modules=true
 copy_jdk_to_puppet_modules=true
 update_nodes_pp_file=true
 
+mysql_root_password=mysql
+
 log=install.log
 
 if [ ${install_jdk} = true ]; then
@@ -66,17 +68,21 @@ fi
 
 if [ ${install_mysql_server} = true ]; then
    echo "Installing MySQL server" | tee -a ${log}
-   apt-get install mysql-server
+   debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
+   debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
+   apt-get -y install mysql-server
 fi
 
 if [ ${install_zip} = true ]; then
    echo "Installing zip" | tee -a ${log}
-   apt-get install zip
+   apt-get -y install zip
 fi
 
 if [ ${download_stratos_packs} = true ]; then
    echo "Downloading stratos packages" | tee -a ${log}
+   mkdir -p ${stratos_packages_path}
    pushd ${stratos_packages_path}
+   
    echo "Downloading source release" | tee -a ${log}
    wget ${stratos_dist_path}/${stratos_source_package}
  
