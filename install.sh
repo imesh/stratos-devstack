@@ -45,6 +45,8 @@ activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
 activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
 
 mysql_root_password="mysql"
+mysql_connector_java="mysql-connector-java-5.1.31"
+mysql_connector_download_url="http://dev.mysql.com/get/Downloads/Connector-J/${mysql_connector_java}.tar.gz"
 
 stratos_version=4.0.0-rc4
 stratos_dist_path=https://dist.apache.org/repos/dist/dev/stratos/${stratos_version}
@@ -73,6 +75,7 @@ stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
 
 install_jdk=false
 install_mysql_server=false
+download_mysql_connector=true
 install_zip=false
 download_stratos_packs=false
 download_activemq_pack=false
@@ -84,7 +87,7 @@ copy_packages_to_puppet_modules=false
 copy_jdk_to_puppet_modules=false
 update_nodes_pp_file=false
 prepare_installer=true
-start_installer=false
+start_installer=true
 
 log=install.log
 
@@ -109,6 +112,16 @@ if [ ${install_mysql_server} = true ]; then
 	debconf-set-selections <<< 'mysql-server mysql-server/root_password password ${mysql_root_password}'
 	debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password ${mysql_root_password}'
 	apt-get -y install mysql-server
+fi
+
+if [ ${download_mysql_connector} = true ]; then	
+	echo "Downloading mysql connector for java" | tee -a ${log}
+	pushd ${stratos_packages_path}
+	wget ${mysql_connector_download_url}
+	tar -zxvf ${mysql_connector_java}.tar.gz
+	cp ${mysql_connector_java}/${mysql_connector_java}-bin.jar .
+	rm -rf ${mysql_connector_java}/
+	popd
 fi
 
 if [ ${install_zip} = true ]; then
