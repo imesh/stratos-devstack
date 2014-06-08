@@ -17,6 +17,8 @@
 #  specific language governing permissions and limitations
 #  under the License.
 # ------------------------------------------------------------------
+# Description: Use this script to install Stratos on a single host.
+#
 # Author: imesh@apache.org
 # ------------------------------------------------------------------
 
