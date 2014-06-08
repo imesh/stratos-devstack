@@ -76,19 +76,19 @@ stratos_ca_package_path=${stratos_packages_path}/${stratos_ca_package}
 stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
 # Configuration parameters end
 
-install_jdk=false
-install_mysql_server=false
+install_jdk=true
+install_mysql_server=true
 download_mysql_connector=true
-install_zip=false
-download_stratos_packs=false
-download_activemq_pack=false
-copy_stratos_source=false
-install_puppet_master=false
-copy_puppet_scripts=false
-copy_activemq_client_libs=false
-copy_packages_to_puppet_modules=false
-copy_jdk_to_puppet_modules=false
-update_nodes_pp_file=false
+install_zip=true
+download_stratos_packs=true
+download_activemq_pack=true
+copy_stratos_source=true
+install_puppet_master=true
+copy_puppet_scripts=true
+copy_activemq_client_libs=true
+copy_packages_to_puppet_modules=true
+copy_jdk_to_puppet_modules=true
+update_nodes_pp_file=true
 prepare_installer=true
 start_installer=true
 
@@ -119,6 +119,7 @@ fi
 
 if [ ${download_mysql_connector} = true ]; then	
 	echo "Downloading mysql connector for java" | tee -a ${log}
+	mkdir -p ${stratos_packages_path} 
 	pushd ${stratos_packages_path}
 	wget ${mysql_connector_download_url}
 	tar -zxvf ${mysql_connector_java}.tar.gz
@@ -160,6 +161,7 @@ if [ ${download_stratos_packs} = true ]; then
 fi
 
 if [ ${download_activemq_pack} = true ]; then
+	mkdir -p ${stratos_packages_path}
 	pushd ${stratos_packages_path}
 	wget ${activemq_download_url}
 	popd
