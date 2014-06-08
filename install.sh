@@ -39,11 +39,6 @@ jdk_folder=jdk1.7.0_55
 java_home="/opt/${jdk_folder}"
 jdk_download_url="http://download.oracle.com/otn-pub/java/jdk/7u55-b13/${jdk_tar_file}"
 
-activemq_tar_file="apache-activemq-5.9.1-bin.tar.gz"
-activemq_download_url="http://apache.spinellicreations.com/activemq/5.9.1/apache-activemq-5.9.1-bin.tar.gz"
-activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
-activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
-
 mysql_host="localhost"
 mysql_username="root"
 mysql_password="mysql"
@@ -58,6 +53,11 @@ stratos_source_path=${host_user_home}"/stratos-source"
 stratos_installer_path=${host_user_home}"/stratos-installer"
 stratos_path=${host_user_home}"/stratos"
 stratos_domain_name="stratos.org"
+
+activemq_tar_file="apache-activemq-5.9.1-bin.tar.gz"
+activemq_download_url="http://apache.spinellicreations.com/activemq/5.9.1/apache-activemq-5.9.1-bin.tar.gz"
+activemq_lib_path=${stratos_packages_path}/"apache-activemq-5.9.1/lib"
+activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geronimo-j2ee-management_1.1_spec-1.0.1.jar geronimo-jms_1.1_spec-1.1.1.jar hawtbuf-1.9.jar"
 
 puppet_installer_path=${host_user_home}"/puppet-installer"
 puppet_master_path=/etc/puppet
