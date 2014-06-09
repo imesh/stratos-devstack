@@ -63,7 +63,8 @@ activemq_lib_required="activemq-broker-5.9.1.jar activemq-client-5.9.1.jar geron
 
 puppet_installer_path=${host_user_home}"/puppet-installer"
 puppet_master_path=/etc/puppet
-puppet_hostname="puppet."${stratos_domain_name}
+puppet_master_ip=${host_private_ip}
+puppet_master_hostname="puppet."${stratos_domain_name}
 nodes_pp_path=${puppet_master_path}/manifests/nodes.pp
 
 stratos_source_folder="apache-stratos-4.0.0-source-release"
@@ -266,7 +267,8 @@ if [ ${prepare_installer} = true ]; then
 	sed -i "s@_HOST_USER_@${host_user}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_STRATOS_DOMAIN_@${stratos_domain_name}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_HOST_PRIVATE_IP_@${host_private_ip}@g" ${stratos_installer_path}/conf/setup.conf
-	sed -i "s@_PUPPET_HOSTNAME_@${puppet_hostname}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_PUPPET_MASTER_IP_@${puppet_master_ip}@g" ${stratos_installer_path}/conf/setup.conf
+	sed -i "s@_PUPPET_MASTER_HOSTNAME_@${puppet_master_hostname}@g" ${stratos_installer_path}/conf/setup.conf
 	
 	sed -i "s@_MYSQL_HOST_@${mysql_host}@g" ${stratos_installer_path}/conf/setup.conf
 	sed -i "s@_MYSQL_USERNAME_@${mysql_username}@g" ${stratos_installer_path}/conf/setup.conf
