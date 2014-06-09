@@ -105,7 +105,7 @@ log=install.log
 if [ ${download_jdk} = true ]; then
 	pushd /opt
 	echo "Downloading jdk" | tee -a ${log}
-	wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" ${jdk_download_url}
+	wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" ${jdk_download_url} -O ${jdk_tar_file}
 	popd
 fi
 
@@ -128,22 +128,22 @@ if [ ${download_stratos_packs} = true ]; then
 	pushd ${stratos_packages_path}
    
 	echo "Downloading source release" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_source_package}
+	wget ${stratos_dist_path}/${stratos_source_package} -O ${stratos_source_package}
  
 	echo "Downloading stratos package" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_package}
+	wget ${stratos_dist_path}/${stratos_package} -O ${stratos_package}
  
 	echo "Downloading cartridge agent package" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_ca_package}
+	wget ${stratos_dist_path}/${stratos_ca_package} -O ${stratos_ca_package}
  
 	echo "Downloading cli package" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_cli_package}
+	wget ${stratos_dist_path}/${stratos_cli_package} -O ${stratos_cli_package}
  
 	echo "Downloading haproxy package" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_haproxy_package}
+	wget ${stratos_dist_path}/${stratos_haproxy_package} -O ${stratos_haproxy_package}
  
 	echo "Downloading load balancer package" | tee -a ${log}
-	wget ${stratos_dist_path}/${stratos_lb_package}
+	wget ${stratos_dist_path}/${stratos_lb_package} -O ${stratos_lb_package}
  
 	echo "Download completed" | tee -a ${log}
 	popd
@@ -152,7 +152,7 @@ fi
 if [ ${download_activemq_pack} = true ]; then
 	mkdir -p ${stratos_packages_path}
 	pushd ${stratos_packages_path}
-	wget ${activemq_download_url}
+	wget ${activemq_download_url} -O ${activemq_tar_file}
 	popd
 fi
 
@@ -169,7 +169,7 @@ if [ ${download_mysql_connector} = true ]; then
 	echo "Downloading mysql connector for java" | tee -a ${log}
 	mkdir -p ${stratos_packages_path} 
 	pushd ${stratos_packages_path}
-	wget ${mysql_connector_download_url}
+	wget ${mysql_connector_download_url} -O ${mysql_connector_java}.tar.gz
 	tar -zxvf ${mysql_connector_java}.tar.gz
 	cp ${mysql_connector_java}/${mysql_connector_java}-bin.jar .
 	rm -rf ${mysql_connector_java}/
