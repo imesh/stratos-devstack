@@ -76,6 +76,10 @@ stratos_lb_package="apache-stratos-load-balancer-4.0.0.zip"
 
 stratos_ca_package_path=${stratos_packages_path}/${stratos_ca_package}
 stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
+
+# Products needs to be installed
+product_puppet_master=true
+
 # Configuration parameters end
 
 download_jdk=true
@@ -86,12 +90,12 @@ install_zip=true
 download_stratos_packs=true
 download_activemq_pack=true
 copy_stratos_source=true
-install_puppet_master=true
-copy_puppet_scripts=true
-copy_activemq_client_libs=true
-copy_packages_to_puppet_modules=true
-copy_jdk_to_puppet_modules=true
-update_nodes_pp_file=true
+install_puppet_master=${product_puppet_master}
+copy_puppet_scripts=${product_puppet_master}
+copy_activemq_client_libs=${product_puppet_master}
+copy_packages_to_puppet_modules=${product_puppet_master}
+copy_jdk_to_puppet_modules=${product_puppet_master}
+update_nodes_pp_file=${product_puppet_master}
 prepare_installer=true
 start_installer=true
 
