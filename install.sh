@@ -78,6 +78,7 @@ stratos_ca_package_path=${stratos_packages_path}/${stratos_ca_package}
 stratos_lb_package_path=${stratos_packages_path}/${stratos_lb_package}
 # Configuration parameters end
 
+download_jdk=true
 install_jdk=true
 install_mysql_server=true
 download_mysql_connector=true
@@ -96,11 +97,15 @@ start_installer=true
 
 log=install.log
 
-if [ ${install_jdk} = true ]; then
+if [ ${download_jdk} = true ]; then
 	pushd /opt
 	echo "Downloading jdk" | tee -a ${log}
 	wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" ${jdk_download_url}
+	popd
+fi
 
+if [ ${install_jdk} = true ]; then
+	pushd /opt
 	echo "Extracting jdk" | tee -a ${log}
 	tar -zxvf ${jdk_tar_file}
 
