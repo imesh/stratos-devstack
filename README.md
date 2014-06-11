@@ -16,3 +16,6 @@ A single script for installing stratos.
    - ec2_availability_zone=""
    - ec2_security_groups=""
 6. Run install.sh
+7. Once Stratos installation is ready create the cartridge base image using another Ubuntu 12.04 instance:
+   - wget https://gist.githubusercontent.com/imesh/f8fd7a40d89dd4b60898/raw/48087c76b853632cf12474ba909bc355fe861666/cartridge-creator.sh
+   - sudo ./cartridge-creator.sh
