@@ -9,7 +9,6 @@ A single script for installing stratos.
 4. Find host private ip address
 5. Update following in install.sh file:
    - host_private_ip=""
-   
    - ec2_identity=""
    - ec2_credential=""
    - ec2_keypair_name=""
