@@ -40,9 +40,9 @@ sudo ./install.sh
 ```
 
 8. Once the Stratos installation is ready, create the cartridge base image using another Ubuntu 12.04 instance:
- ```bash
- cd /tmp/
- wget https://gist.githubusercontent.com/imesh/f8fd7a40d89dd4b60898/raw/48087c76b853632cf12474ba909bc355fe861666/cartridge-creator.sh
- chmod +x cartridge-creator.sh
- sudo ./cartridge-creator.sh
- ```
+```bash
+cd /tmp/
+wget https://gist.githubusercontent.com/imesh/f8fd7a40d89dd4b60898/raw/48087c76b853632cf12474ba909bc355fe861666/cartridge-creator.sh
+chmod +x cartridge-creator.sh
+sudo ./cartridge-creator.sh
+```
