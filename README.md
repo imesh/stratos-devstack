@@ -5,7 +5,7 @@ A single script for installing stratos.
 
 1. Spawn an Ubuntu 12.04 instance
 
-2. Update the system by running:
+2. Update the system and refresh repositories by running:
 ```bash
 sudo apt-get update
 ```
