@@ -21,13 +21,15 @@ git clone https://github.com/imesh/stratos-dev-stack.git
 
 - Update following in the install.sh file:
 ```bash
-host_private_ip=""
-ec2_identity=""
-ec2_credential=""
-ec2_keypair_name=""
-ec2_owner_id=""
-ec2_availability_zone=""
-ec2_security_groups=""
+host_private_ip="" # Private IP address of the Stratos host
+ec2_identity="" # Find EC2 access key id from EC2 security credentials page [1]
+ec2_credential="" # Find EC2 secret key from EC2 security credentials page [1]
+ec2_keypair_name="" # Create a new keypair and add the keypair name here
+ec2_owner_id="" # Find the owner id from the EC2 console [1]
+ec2_availability_zone="" # Enter preferred EC2 availability zone
+ec2_security_groups="" # Enter security group names, comma separated
+
+# [1] https://console.aws.amazon.com/iam/home
 ```
 
 - Execute the installer
