@@ -1,7 +1,9 @@
 stratos-dev-stack
 =================
 
-A single script for installing stratos.
+Stratos dev-stack provides a single script for installing Stratos on Amazon EC2. This script will download, install & configure Puppet Master, MySQL Server, ActiveMQ and Stratos on a single host. Stratos packages will be downloaded from the latest stable release. If required it can be point to a different version.
+
+Once Stratos is installed, the base cartridge image needs to be created. Please follow the below steps to install Stratos:
 
 - Spawn an Ubuntu 12.04 instance
 
@@ -57,3 +59,5 @@ sudo ./cartridge-creator.sh
 - Once the above configuration is complete go to the AWS management console/instances and create an image from the above instance. Make a note of the image id (AMI-ID), this needs to be specified in the cartridge definition.
 
 - Now go to https://<stratos-host-public-ip>:9443/console and login using admin/admin.
+
+- Use the Configuration Wizard to configure Stratos.
