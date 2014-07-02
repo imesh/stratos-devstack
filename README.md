@@ -5,7 +5,9 @@ Stratos devstack provides a single script for installing Stratos on Amazon EC2. 
 
 Please follow the below steps to install Stratos:
 
-- Spawn an Ubuntu 12.04 instance
+- Spawn an Ubuntu 12.04 instance. Use the below link to find the AMI-ID:
+```https://cloud-images.ubuntu.com/locator/ec2/
+```
 
 - Update the system and refresh repositories by running:
 ```bash
