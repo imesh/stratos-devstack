@@ -1,9 +1,9 @@
-stratos-dev-stack
+stratos-devstack
 =================
 
-Stratos dev-stack provides a single script for installing Stratos on Amazon EC2. This script will download, install & configure Puppet Master, MySQL Server, ActiveMQ and Stratos on a single host. Stratos packages will be downloaded from the latest stable release. If required it can be point to a different version.
+Stratos devstack provides a single script for installing Stratos on Amazon EC2. This script will download, install & configure Puppet Master, MySQL Server, ActiveMQ and Stratos on a single host. Stratos packages will be downloaded from the latest stable release. If required it can be point to a different version.
 
-Once Stratos is installed, the base cartridge image needs to be created. Please follow the below steps to install Stratos:
+Please follow the below steps to install Stratos:
 
 - Spawn an Ubuntu 12.04 instance
 
@@ -52,12 +52,10 @@ sudo ./cartridge-creator.sh
 ```
 
 - The above script will ask for the following parameters:
-  - Service name: Enter "default" to create the base cartridge image. This cartridge image can be used to create any type of a cartridge.
+  - Service name: Enter "default" to create the base cartridge image.
   - Puppet master IP: Enter the public IP address of the Stratos host.
-  - Puppet master hostname: Enter "puppet.stratos.org", this is the hostname of the puppet master, in single node instllation puppet master is running in the Stratos host.
+  - Puppet master hostname: Enter "puppet.stratos.org", this is the hostname of the puppet master, in this installation puppet master is running in the Stratos host and it is given the above host name.
   
-- Once the above configuration is complete go to the AWS management console/instances and create an image from the above instance. Make a note of the image id (AMI-ID), this needs to be specified in the cartridge definition.
+- Once the above process is complete go to the AWS management console/instances and create an image from the above instance. Make a note of the image id (AMI-ID), this needs to be specified in the cartridge definition.
 
-- Now go to https://<stratos-host-public-ip>:9443/console and login using admin/admin.
-
-- Use the Configuration Wizard to configure Stratos.
+- Now go to https://<stratos-host-public-ip>:9443/console and login using admin/admin. Use the Configuration Wizard to configure Stratos.
