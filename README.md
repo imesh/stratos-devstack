@@ -23,6 +23,9 @@ sudo apt-get install git
 git clone https://github.com/imesh/stratos-dev-stack.git
 ```
 - Find the host's private IP address
+```
+ec2-metadata | grep local-ipv4
+```
 
 - Update following in the install.sh file:
 ```bash
