@@ -64,4 +64,4 @@ sudo ./cartridge-creator.sh
   
 - Once the above process is complete go to the AWS management console/instances and create an image from the above instance. Make a note of the image id (AMI-ID), this needs to be specified in the cartridge definition.
 
-- Now go to https://<stratos-host-public-ip>:9443/console and login using admin/admin. Use the Configuration Wizard to configure Stratos.
+- Now go to https://stratos-host-public-ip:9443/console and login using admin/admin. Use the Configuration Wizard to configure Stratos.
