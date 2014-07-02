@@ -18,7 +18,7 @@ sudo apt-get update
 ```bash
 sudo apt-get install git
 ```
-- Checkout Stratos Dev Stack
+- Checkout Stratos Devstack
 ```bash
 git clone https://github.com/imesh/stratos-dev-stack.git
 ```
