@@ -10,15 +10,15 @@ Please follow the below steps to install Stratos:
 https://cloud-images.ubuntu.com/locator/ec2/
 ```
 
-- Update the system and refresh repositories by running:
+- SSH into the above instance & execute apt-get update:
 ```bash
 sudo apt-get update
 ```
-- Install git
+- Install git client:
 ```bash
 sudo apt-get install git
 ```
-- Checkout Stratos Devstack
+- Checkout Stratos devstack
 ```bash
 git clone https://github.com/imesh/stratos-dev-stack.git
 ```
