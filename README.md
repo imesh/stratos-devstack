@@ -39,10 +39,21 @@ chmod +x install.sh
 sudo ./install.sh
 ```
 
-- Once the Stratos installation is ready, create the cartridge base image using another Ubuntu 12.04 instance:
+- Once the Stratos installation is ready, spawn another Ubuntu 12.04 instance to create the base cartridge image.
+
+- SSH into the above instance and execute the following command set. This will download the cartridge-creator.sh file and execute it in /tmp directory.
 ```bash
 cd /tmp/
 wget https://gist.githubusercontent.com/imesh/f8fd7a40d89dd4b60898/raw/48087c76b853632cf12474ba909bc355fe861666/cartridge-creator.sh
 chmod +x cartridge-creator.sh
 sudo ./cartridge-creator.sh
 ```
+
+- The above script will ask for the following parameters:
+  - Service name: Enter "default" to create the base cartridge image. This cartridge image can be used to create any type of a cartridge.
+  - Puppet master IP: Enter the public IP address of the Stratos host.
+  - Puppet master hostname: Enter "puppet.stratos.org", this is the hostname of the puppet master, in single node instllation puppet master is running in the Stratos host.
+  
+- Once the above configuration is complete go to the AWS management console/instances and create an image from the above instance. Make a note of the image id (AMI-ID), this needs to be specified in the cartridge definition.
+
+- Now go to https://<stratos-host-public-ip>:9443/console and login using admin/admin.
